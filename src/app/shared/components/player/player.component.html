@@ -1,0 +1,41 @@
+<div
+class="container-player"
+[style.background]="'linear-gradient(90deg, ' + colorInit + ' 0%, '+ colorEnd +' 100%)'"
+>
+  <div class="container-music">
+    <div class="container-volume">
+      <mat-icon class="icon-volume" color="accent">volume_mute</mat-icon>
+      <mat-slider class="volume-bar" color="accent">
+        <input matSliderThumb>
+      </mat-slider>
+      <mat-icon class="icon-volume" color="accent">volume_up</mat-icon>
+    </div>
+    <div class="container-musicplayer">
+      <div class="music-image">
+        <picture>
+          <source
+          type="image/webp"
+          lazyload="/assets/img/main.webp"
+          srcset="/assets/img/main.webp">
+          <img src="/assets/img/mains.svg" width="100%">
+        </picture>
+
+      </div>
+      <div class="music-detail">
+        <div class="status">
+          <p>Escuchando</p>
+        </div>
+        <div class="title">
+          <p>Jazz Quartet Band</p>
+        </div>
+        <div class="type">
+          <p>Canción</p>
+        </div>
+        <mat-icon class="icon-volume" color="accent">pause</mat-icon>
+        <mat-slider class="status-bar" color="accent">
+          <input matSliderThumb>
+        </mat-slider>
+      </div>
+    </div>
+  </div>
+</div>

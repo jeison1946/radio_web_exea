@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, Inject, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSliderModule } from '@angular/material/slider';
 
@@ -20,8 +21,19 @@ export class PlayerComponent {
 
   volume: number = 50;
 
+  constructor(@Inject(DOCUMENT) private document: Document) {
+
+  }
+
   onVolumeChange() {
     // Aquí puedes realizar acciones adicionales cuando cambia el volumen
     console.log('Volumen actual:', this.volume);
+  }
+
+  ngOnInit() {
+    const audio = <HTMLAudioElement>this.document.getElementById("player");
+    audio.onloadedmetadata = (metadata:any) =>{
+      console.log(metadata)
+    }
   }
 }

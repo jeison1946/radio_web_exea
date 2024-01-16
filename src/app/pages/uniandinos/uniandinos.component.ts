@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { PlayerComponent } from "../../shared/components/player/player.component";
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-uniandinos',
@@ -10,4 +11,10 @@ import { PlayerComponent } from "../../shared/components/player/player.component
 })
 export class UniandinosComponent {
 
+  constructor(@Inject(DOCUMENT) private document: Document) {
+    const title = document.querySelector('#titlePage');
+    if(title) {
+      title.textContent = 'Uniandinos | Streaming Exea';
+    }
+  }
 }

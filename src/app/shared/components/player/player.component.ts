@@ -40,7 +40,7 @@ export class PlayerComponent {
 
   ngOnInit() {
     const audio = <HTMLAudioElement>this.document.getElementById("player");
-    //this.conection.getMp3StreamTitle('http://stream.exeamedia.com:8080/balsamo', 19200);
+    this.conection.getMp3StreamTitle('http://stream.exeamedia.com:8080/balsamo', 19200);
     //console.log(metada);
   }
 

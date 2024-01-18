@@ -5,8 +5,14 @@ class="container-player"
   <div class="container-music">
     <div class="container-volume">
       <mat-icon class="icon-volume" color="accent">volume_mute</mat-icon>
-      <mat-slider class="volume-bar" color="accent">
-        <input matSliderThumb>
+      <mat-slider
+      class="volume-bar" color="accent"
+      thumbLabel
+      [min]="0"
+      [max]="100"
+      (input)="onVolumeChange($event)"
+      >
+        <input matSliderThumb value="{{volume}}">
       </mat-slider>
       <mat-icon class="icon-volume" color="accent">volume_up</mat-icon>
     </div>
@@ -22,21 +28,22 @@ class="container-player"
 
       </div>
       <div class="music-detail">
-        <audio controls id="player" src="http://stream.exeamedia.com/balsamo">
+        <audio controls id="player" src="http://stream.exeamedia.com/balsamo" hidden #audioPlayer>
         </audio>
         <div class="status">
           <p>Escuchando</p>
         </div>
         <div class="title">
-          <p>Jazz Quartet Band</p>
+          <p>Exea media</p>
         </div>
         <div class="type">
           <p>Canción</p>
         </div>
-        <mat-icon class="icon-volume" color="accent">pause</mat-icon>
-        <mat-slider class="status-bar" color="accent">
+        <mat-icon *ngIf="listen" (click)="onPause()" class="icon-volume" color="accent">pause</mat-icon>
+        <mat-icon *ngIf="!listen" (click)="onPlay()" class="icon-volume" color="accent">play_arrow</mat-icon>
+        <!-- <mat-slider class="status-bar" color="accent">
           <input matSliderThumb>
-        </mat-slider>
+        </mat-slider> -->
       </div>
     </div>
   </div>

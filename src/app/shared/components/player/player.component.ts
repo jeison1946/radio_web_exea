@@ -1,7 +1,8 @@
-import { DOCUMENT } from '@angular/common';
-import { Component, Inject, Input } from '@angular/core';
+import { CommonModule, DOCUMENT } from '@angular/common';
+import { Component, ElementRef, Inject, Input, ViewChild } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSliderModule } from '@angular/material/slider';
+import { ConectionService } from '../../services/conection.service';
 
 @Component({
   selector: 'app-player',
@@ -9,6 +10,7 @@ import { MatSliderModule } from '@angular/material/slider';
   templateUrl: './player.component.html',
   styleUrl: './player.component.scss',
   imports: [
+    CommonModule,
     MatIconModule,
     MatSliderModule
   ]
@@ -19,21 +21,40 @@ export class PlayerComponent {
   @Input() colorEnd!: string;
   @Input() idEntity: string = 'main';
 
-  volume: number = 50;
+  listen: boolean = false;
 
-  constructor(@Inject(DOCUMENT) private document: Document) {
+  @ViewChild('audioPlayer') audioPlayer: ElementRef | undefined;
+
+  volume: number = 90;
+
+  constructor(@Inject(DOCUMENT) private document: Document, private conection: ConectionService) {
 
   }
 
-  onVolumeChange() {
-    // Aquí puedes realizar acciones adicionales cuando cambia el volumen
+  onVolumeChange(e:any) {
+    this.volume = e.srcElement.value;
     console.log('Volumen actual:', this.volume);
+    const container = this.audioPlayer?.nativeElement;
+    container.volume = this.volume / 100;
   }
 
   ngOnInit() {
     const audio = <HTMLAudioElement>this.document.getElementById("player");
-    audio.onloadedmetadata = (metadata:any) =>{
-      console.log(metadata)
-    }
+    this.conection.getMp3StreamTitle('http://stream.exeamedia.com:8080/balsamo', 19200);
+    //console.log(metada);
+  }
+
+  onPlay() {
+    const container = this.audioPlayer?.nativeElement;
+    container.play();
+    container.volume = this.volume / 100;
+    this.listen = true;
+  }
+
+  onPause() {
+    const container = this.audioPlayer?.nativeElement;
+    container.pause();
+    container.volume = this.volume / 100;
+    this.listen = false;
   }
 }

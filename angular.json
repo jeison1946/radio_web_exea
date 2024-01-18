@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "exea_player": {
+    "player_web_exea": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/exea_player",
+            "outputPath": "dist/player_web_exea",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -30,15 +30,9 @@
               "src/assets"
             ],
             "styles": [
-              "@angular/material/prebuilt-themes/pink-bluegrey.css",
               "src/styles.scss"
             ],
-            "scripts": [],
-            "server": "src/main.server.ts",
-            "prerender": true,
-            "ssr": {
-              "entry": "server.ts"
-            }
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -68,10 +62,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "exea_player:build:production"
+              "buildTarget": "player_web_exea:build:production"
             },
             "development": {
-              "buildTarget": "exea_player:build:development"
+              "buildTarget": "player_web_exea:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -79,7 +73,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "exea_player:build"
+            "buildTarget": "player_web_exea:build"
           }
         },
         "test": {
@@ -96,7 +90,6 @@
               "src/assets"
             ],
             "styles": [
-              "@angular/material/prebuilt-themes/pink-bluegrey.css",
               "src/styles.scss"
             ],
             "scripts": []

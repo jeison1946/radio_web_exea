@@ -20,6 +20,8 @@ export class PlayerComponent {
   @Input() colorInit!: string;
   @Input() colorEnd!: string;
   @Input() idEntity: string = 'main';
+  @Input() url!: string;
+  nameSong:string = 'Uniandinos';
 
   listen: boolean = false;
 
@@ -39,9 +41,7 @@ export class PlayerComponent {
   }
 
   ngOnInit() {
-    const audio = <HTMLAudioElement>this.document.getElementById("player");
-    this.conection.getMp3StreamTitle('http://stream.exeamedia.com:8080/balsamo', 19200);
-    //console.log(metada);
+    this.loadTagsSong();
   }
 
   onPlay() {
@@ -56,5 +56,20 @@ export class PlayerComponent {
     container.pause();
     container.volume = this.volume / 100;
     this.listen = false;
+  }
+
+  loadTagsSong() {
+    this.conection.getMp3StreamTitle(this.url, 19200).subscribe(
+      (res:any) => {
+        console.log(res);
+        this.nameSong = res[1]+ ' (' + res[2] + ')';
+        const timer:any = setTimeout( () => {
+          this.loadTagsSong();
+        }, 30000);
+      },
+      (error) => {
+        console.error(`Error: ${error.message}`);
+      }
+    );
   }
 }
